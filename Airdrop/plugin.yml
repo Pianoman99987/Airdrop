@@ -1,0 +1,8 @@
+name: Airdrop
+main: me.gregoryw.airdrop.Airdrop
+version: 1.0
+api-version: 1.13
+commands:
+    airdrop:
+        description: Call in an airdrop!
+        usage: /airdrop <minecraft:item> <amount> or /airdrop <kit name>
