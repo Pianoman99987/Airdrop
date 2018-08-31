@@ -12,10 +12,13 @@ public class Airdrop extends JavaPlugin {
 	public void onEnable() {
 		
 		// Register Commands
-		this.getCommand("airdrop").setExecutor(new CmdAirdrop(this));
+		this.getCommand("airdrop").setExecutor(new CmdAirdrop());
 		
 		// Register Listeners
 		Bukkit.getPluginManager().registerEvents(new FallingBlockListener(), this);
+		
+		// Load configuration files
+		PackagesConfig.loadConfig();
 		
 		
 	}

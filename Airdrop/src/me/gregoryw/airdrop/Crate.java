@@ -58,7 +58,6 @@ public class Crate {
 		blockChest.setType(Material.CHEST);
 
 		Chest chest = (Chest) blockChest.getState();
-		chest.getBlockInventory().addItem(new ItemStack(Material.STICK, 3));
 
 		for (ItemStack is : contents) {
 			chest.getBlockInventory().addItem(is);
