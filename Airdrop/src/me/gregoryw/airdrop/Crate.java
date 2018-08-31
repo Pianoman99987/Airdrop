@@ -8,12 +8,11 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.entity.FallingBlock;
-import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
 import me.gregoryw.airdrop.helpers.CrateList;
 
-public class Crate implements Listener {
+public class Crate {
 
 	private Location location;
 	private World world;
@@ -31,7 +30,7 @@ public class Crate implements Listener {
 	 * @param world
 	 * @param contents
 	 */
-	public Crate(Location location, World world, ArrayList<ItemStack> contents, Airdrop plugin) {
+	public Crate(Location location, World world, ArrayList<ItemStack> contents) {
 
 		this.location = location;
 		this.world = world;

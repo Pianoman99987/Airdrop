@@ -41,28 +41,29 @@ public class CmdAirdrop implements CommandExecutor {
 			}
 
 			// Send package to sender where only argument is the package
-			if (args.length == 2) {
+			if (args.length == 1) {
 				
-				String contents = args[1];
+				String contents = args[0];
 				
 				if(contents.equals("testPackage")) {
 					ChatHandler.sendMessage(player, "You summoned the test package");
 				}
 
 				Location loc = player.getLocation();
+				
+				System.out.println(loc.getY());
 
 				noBlocksAbovePlayer = true;
+				
+				checkBlocksAbovePlayer(loc);
 
-				if (noBlocksAbovePlayer(loc)) {
+				if (noBlocksAbovePlayer) {
 
 					// TODO Find package and package contents
 					ArrayList<ItemStack> packageContents = new ArrayList<ItemStack>();
 
-					Crate crate = new Crate(loc.add(0, 20, 0), loc.getWorld(), packageContents, plugin);
-					Bukkit.getPluginManager().registerEvents(crate, plugin);
+					Crate crate = new Crate(loc.add(0, 20, 0), loc.getWorld(), packageContents);
 					crate.dropCrate();
-					
-					//EntityChangeBlockEvent.getHandlerList().unregister(crate);
 
 					return true;
 
@@ -96,26 +97,31 @@ public class CmdAirdrop implements CommandExecutor {
 	 * @param loc
 	 * @return
 	 */
-	private boolean noBlocksAbovePlayer(Location loc) {
+	private void checkBlocksAbovePlayer(Location loc) {
 
 		Bukkit.getScheduler().runTask(plugin, new Runnable() {
 
 			@Override
 			public void run() {
 
+				System.out.println("THe scheduler starts");
+				
 				for (int x = 0; x < 20; x++) {
+					
+					System.out.println("Checking");
+					
+					System.out.println(loc.getY());
 
-					if (loc.getBlock().getType() != Material.AIR) {
+					if (!loc.getBlock().getType().equals(Material.AIR)) {
+						System.out.println("Found block");
 						noBlocksAbovePlayer = false;
 					}
 
-					loc.add(0, 1, 0);
+					loc.add(0, 1.0, 0);
 				}
 			}
 
 		});
-
-		return noBlocksAbovePlayer;
 	}
 
 }
