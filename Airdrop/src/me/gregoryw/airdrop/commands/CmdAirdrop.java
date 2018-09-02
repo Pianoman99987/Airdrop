@@ -102,10 +102,16 @@ public class CmdAirdrop implements CommandExecutor {
 		return itemsToReturn;
 
 	}
-	
+
+	/**
+	 * Checks if there are any blocks within 20 blocks above the player
+	 * 
+	 * @param loc
+	 * @return
+	 */
 	private boolean checkBlocksAbovePlayer(Location loc) {
 		boolean isAbove = true;
-		
+
 		for (int x = 0; x < 20; x++) {
 
 			if (!loc.getBlock().getType().equals(Material.AIR)) {
@@ -114,8 +120,7 @@ public class CmdAirdrop implements CommandExecutor {
 
 			loc.add(0, 1.0, 0);
 		}
-		
-		
+
 		return isAbove;
 	}
 
