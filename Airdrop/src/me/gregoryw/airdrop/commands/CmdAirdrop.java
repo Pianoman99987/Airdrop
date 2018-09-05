@@ -2,8 +2,10 @@ package me.gregoryw.airdrop.commands;
 
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -61,13 +63,56 @@ public class CmdAirdrop implements CommandExecutor {
 			}
 
 			// Case where crate is dropped on another player
-			if (args.length == 3) {
+			// Args: playername packagename
+			
+			if (args.length == 2) {
+				
+				String p = args[0];
+				
+				try {
+				Player target = Bukkit.getServer().getPlayer(p);
+				}
+				catch(Exception e) {
+					player.sendMessage("Invalid Player");
+				}
+				
+				String packageName = args[1];
 
+				ArrayList<ItemStack> items = getItemsInPackage(packageName, player);
+
+				if (items.isEmpty()) {
+					return false;
+				}
+
+				Location loc = player.getLocation();
+
+				boolean noBlocksAbovePlayer = checkBlocksAbovePlayer(loc);
+
+				if (noBlocksAbovePlayer) {
+
+					Crate crate = new Crate(loc, loc.getWorld(), items);
+					crate.dropCrate();
+
+					return true;
+
+				} else {
+					// Send some error
+					ChatHandler.sendErrorMessage(player);
+					System.out.println("No space above player");
+				}
+				
 			}
 
 			// Case where crate is dropped at a certain location
-			if (args.length == 4) {
+			
+			//args x z packagename
+			if (args.length == 3) {
+				World w = player.getWorld();
+				Double xloc = Double.parseDouble(args[0]);
+				Double zloc = Double.parseDouble(args[1]);
 
+				Location l = new Location(w,xloc,zloc,(Double) null);
+				//Find out how to determine highest y at point
 			}
 
 		}
