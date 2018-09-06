@@ -40,7 +40,8 @@ public class CmdAirdrop implements CommandExecutor {
 				ArrayList<ItemStack> items = getItemsInPackage(packageName, player);
 
 				if (items.isEmpty()) {
-					return false;
+					ChatHandler.sendErrorMessage(player, "These is an error with this package!");
+					return true;
 				}
 
 				Location loc = player.getLocation();
@@ -68,12 +69,12 @@ public class CmdAirdrop implements CommandExecutor {
 			if (args.length == 2) {
 				
 				String p = args[0];
-				
-				try {
+			
 				Player target = Bukkit.getServer().getPlayer(p);
-				}
-				catch(Exception e) {
-					player.sendMessage("Invalid Player");
+				
+				if(target == null) {
+					ChatHandler.sendMessage(player, "Player not found!");
+					return true;
 				}
 				
 				String packageName = args[1];
@@ -81,10 +82,11 @@ public class CmdAirdrop implements CommandExecutor {
 				ArrayList<ItemStack> items = getItemsInPackage(packageName, player);
 
 				if (items.isEmpty()) {
-					return false;
+					ChatHandler.sendErrorMessage(player, "These is an error with this package!");
+					return true;
 				}
 
-				Location loc = player.getLocation();
+				Location loc = target.getLocation();
 
 				boolean noBlocksAbovePlayer = checkBlocksAbovePlayer(loc);
 
