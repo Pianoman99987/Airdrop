@@ -43,6 +43,11 @@ public class PackagesConfig {
 		yaml.createSection("packages.default");
 		yaml.set("packages.default.items.1", new ItemStack(Material.STICK, 3));
 		yaml.set("packages.default.items.2", new ItemStack(Material.OAK_PLANKS, 32));
+		
+		yaml.createSection("packages.starter");
+		yaml.set("packages.starter.items.1", new ItemStack(Material.IRON_CHESTPLATE, 1));
+		yaml.set("packages.starter.items.2", new ItemStack(Material.BREAD, 2));
+		
 		yaml.save(f);
 	}
 

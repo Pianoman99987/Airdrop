@@ -30,7 +30,7 @@ public class CmdAirdrop implements CommandExecutor {
 
 			// If no arguments, return false
 			if (args.length == 0) {
-				ChatHandler.sendMessage(player, "Version: " + Bukkit.getPluginManager().getPlugin("Airdrop").getDescription().getVersion());
+				ChatHandler.sendPFMessage(player, "Version: " + Bukkit.getPluginManager().getPlugin("Airdrop").getDescription().getVersion());
 				return false;
 			}
 
