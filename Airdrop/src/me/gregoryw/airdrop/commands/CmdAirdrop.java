@@ -12,6 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import me.gregoryw.airdrop.Airdrop;
 import me.gregoryw.airdrop.Crate;
 import me.gregoryw.airdrop.PackagesConfig;
 import me.gregoryw.airdrop.helpers.ChatHandler;
@@ -29,6 +30,7 @@ public class CmdAirdrop implements CommandExecutor {
 
 			// If no arguments, return false
 			if (args.length == 0) {
+				ChatHandler.sendMessage(player, "Version: " + Bukkit.getPluginManager().getPlugin("Airdrop").getDescription().getVersion());
 				return false;
 			}
 
@@ -68,7 +70,7 @@ public class CmdAirdrop implements CommandExecutor {
 			
 			if (args.length == 2) {
 				
-				String p = args[0];
+				String p = args[1];
 			
 				Player target = Bukkit.getServer().getPlayer(p);
 				
@@ -77,7 +79,7 @@ public class CmdAirdrop implements CommandExecutor {
 					return true;
 				}
 				
-				String packageName = args[1];
+				String packageName = args[0];
 
 				ArrayList<ItemStack> items = getItemsInPackage(packageName, player);
 
@@ -108,13 +110,17 @@ public class CmdAirdrop implements CommandExecutor {
 			// Case where crate is dropped at a certain location
 			
 			//args x z packagename
-			if (args.length == 3) {
+			if (args.length >= 3) {
+				/*
 				World w = player.getWorld();
 				Double xloc = Double.parseDouble(args[0]);
 				Double zloc = Double.parseDouble(args[1]);
 
 				Location l = new Location(w,xloc,zloc,(Double) null);
 				//Find out how to determine highest y at point
+				 */
+				return false;
+				
 			}
 
 		}
