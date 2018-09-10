@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Airdrop/src"/>
+	<classpathentry kind="lib" path="/Users/luke/Downloads/spigot-api-1.13-R0.1-20180731.225309-77-shaded.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
