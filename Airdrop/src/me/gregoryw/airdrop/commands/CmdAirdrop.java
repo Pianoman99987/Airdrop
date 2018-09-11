@@ -6,13 +6,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import me.gregoryw.airdrop.Airdrop;
 import me.gregoryw.airdrop.Crate;
 import me.gregoryw.airdrop.PackagesConfig;
 import me.gregoryw.airdrop.helpers.ChatHandler;
@@ -66,7 +66,7 @@ public class CmdAirdrop implements CommandExecutor {
 			}
 
 			// Case where crate is dropped on another player
-			// Args: playername packagename
+			// Args: packagename player
 			
 			if (args.length == 2) {
 				
@@ -109,16 +109,46 @@ public class CmdAirdrop implements CommandExecutor {
 
 			// Case where crate is dropped at a certain location
 			
-			//args x z packagename
+			//args packagename x y z
 			if (args.length >= 3) {
-				/*
-				World w = player.getWorld();
-				Double xloc = Double.parseDouble(args[0]);
-				Double zloc = Double.parseDouble(args[1]);
+				
+				String packageName = args[0];
+				
+				ArrayList<ItemStack> items = getItemsInPackage(packageName, player);
 
-				Location l = new Location(w,xloc,zloc,(Double) null);
-				//Find out how to determine highest y at point
-				 */
+				if (items.isEmpty()) {
+					ChatHandler.sendErrorMessage(player, "These is an error with this package!");
+					return true;
+				}
+				
+				World w = player.getWorld();
+				double xLoc = 0.0;
+				double yLoc = 0.0;
+				double zLoc = 0.0;
+				
+				try {
+					xLoc = Double.parseDouble(args[1]);
+					yLoc = Double.parseDouble(args[2]);
+					zLoc = Double.parseDouble(args[3]);
+				} catch (NumberFormatException e) {
+					ChatHandler.sendPFMessage(player, "Those coordinates weren't numbers!");
+					return false;
+				}
+
+				Location loc = new Location(w,xLoc, yLoc, zLoc);
+				
+				Block blockAtLoc = loc.getBlock();
+				if(blockAtLoc.getType() == Material.AIR) {
+					
+					Crate crate = new Crate(loc, loc.getWorld(), items);
+					crate.dropCrate();
+
+					return true;
+					
+				} else {
+					ChatHandler.sendErrorMessage(player, "There is a block at this location!");
+				}
+				 
 				return false;
 				
 			}
