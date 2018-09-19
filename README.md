@@ -13,7 +13,7 @@ Displays general command usage and version
 
 
 
-**/airdrop** packagename
+**/airdrop packagename**
 
 Drops a specified package on the command sender.
 
@@ -21,7 +21,7 @@ Example: /airdrop starter
 
 
 
-**/airdrop** packagename [player_name]
+**/airdrop packagename [player_name]** 
 
 Drops a specified package on a specified player.
 
