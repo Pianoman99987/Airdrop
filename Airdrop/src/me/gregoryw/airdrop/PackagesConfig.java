@@ -51,6 +51,7 @@ public class PackagesConfig {
 		yaml.set("packages.starter.items.4", new ItemStack(Material.IRON_BOOTS, 1));
 		yaml.set("packages.starter.items.5", new ItemStack(Material.BREAD, 2));
 		
+		
 		yaml.save(f);
 	}
 
